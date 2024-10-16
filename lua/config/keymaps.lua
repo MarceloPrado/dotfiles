@@ -7,3 +7,12 @@ vim.keymap.set("n", "<C-S-R>", require("telescope.builtin").lsp_references, {
   noremap = true,
   silent = true,
 })
+
+local cmp = require("cmp")
+
+cmp.setup({
+  mapping = {
+    ["<C-.>"] = cmp.mapping.complete(), -- Map Control + Dot to trigger completion
+    -- Other mappings can go here
+  },
+})

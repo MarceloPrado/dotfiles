@@ -28,6 +28,7 @@ echo "-> Claude Code"
 mkdir -p ~/.claude/hooks
 ln -sf "$DOTFILES/claude/hooks/notify-waiting.sh" ~/.claude/hooks/notify-waiting.sh
 ln -sf "$DOTFILES/claude/settings.json" ~/.claude/settings.json
+ln -sf "$DOTFILES/claude/keybindings.json" ~/.claude/keybindings.json
 
 # --- Dependencies ---
 if command -v brew &>/dev/null; then

@@ -1,4 +1,13 @@
-# 💤 LazyVim
+# dotfiles
 
-A starter template for [LazyVim](https://github.com/LazyVim/LazyVim).
-Refer to the [documentation](https://lazyvim.github.io/installation) to get started.
+Personal config for Neovim, tmux (catppuccin), and Claude Code.
+
+## Install
+
+```bash
+git clone https://github.com/marceloprado/dotfiles ~/src/dotfiles
+cd ~/src/dotfiles
+./install.sh
+```
+
+Symlinks everything into place and installs dependencies.

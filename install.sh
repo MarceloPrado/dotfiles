@@ -30,6 +30,12 @@ ln -sf "$DOTFILES/claude/hooks/notify-waiting.sh" ~/.claude/hooks/notify-waiting
 ln -sf "$DOTFILES/claude/settings.json" ~/.claude/settings.json
 ln -sf "$DOTFILES/claude/keybindings.json" ~/.claude/keybindings.json
 
+# --- Codex CLI ---
+echo "-> Codex CLI"
+# notify hook is referenced directly from dotfiles in ~/.codex/config.toml
+# Just ensure the script is executable
+chmod +x "$DOTFILES/codex/hooks/notify-waiting.sh"
+
 # --- Dependencies ---
 if command -v brew &>/dev/null; then
   if ! command -v terminal-notifier &>/dev/null; then

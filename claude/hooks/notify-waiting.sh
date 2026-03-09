@@ -17,13 +17,10 @@ if [[ "$pane_active" == "1" && "$frontmost" == "$terminal_app" ]]; then
   exit 0
 fi
 
-# Extract last user prompt from transcript for context
+# Read hook stdin and log for debugging
 input=$(cat)
-transcript=$(echo "$input" | jq -r '.transcript_path' 2>/dev/null)
-prompt=""
-if [ -n "$transcript" ] && [ -f "$transcript" ]; then
-  prompt=$(jq -r 'select(.type == "user") | .message.content | if type == "array" then map(select(.type == "text") | .text) | first // empty else . end' "$transcript" 2>/dev/null | tail -1 | head -c 100)
-fi
+echo "$input" > /tmp/claude-hook-debug.json
+prompt=$(echo "$input" | jq -r '.last_user_message // empty' 2>/dev/null | head -c 100)
 
 TMUX_SESSION=$(tmux display-message -p '#S')
 TMUX_WINDOW=$(tmux display-message -p '#I')
@@ -41,7 +38,7 @@ terminal-notifier \
   -title "Claude Code" \
   -subtitle "$TMUX_SESSION — $TMUX_WINDOW_NAME" \
   -message "$message" \
-  -execute "tmux select-window -t '$TMUX_SESSION:$TMUX_WINDOW'" \
+  -execute "tmux select-window -t '$TMUX_SESSION:$TMUX_WINDOW'; open -b com.mitchellh.ghostty" \
   -group "claude-$TMUX_SESSION-$TMUX_WINDOW" \
   -ignoreDnD
 

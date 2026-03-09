@@ -43,7 +43,7 @@ fi
 
 terminal-notifier \
   -title "Codex" \
-  -subtitle "$TMUX_SESSION — $TMUX_WINDOW_NAME" \
+  -subtitle "$TMUX_WINDOW_NAME" \
   -message "$message" \
   -execute "/usr/bin/osascript -e 'tell application \"Ghostty\" to activate' -e 'delay 0.1' -e 'tell application \"System Events\" to tell process \"Ghostty\" to click radio button \"tmux\" of tab group \"tab bar\" of window 1' && /opt/homebrew/bin/tmux select-window -t '$TMUX_SESSION:$TMUX_WINDOW'" \
   -group "codex-${thread_id:-$TMUX_SESSION-$TMUX_WINDOW}" \

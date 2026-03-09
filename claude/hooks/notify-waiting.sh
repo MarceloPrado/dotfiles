@@ -17,16 +17,15 @@ if [[ "$pane_active" == "1" && "$frontmost" == "$terminal_app" ]]; then
   exit 0
 fi
 
-# Read hook stdin and log for debugging
+# Read hook stdin and extract context
 input=$(cat)
-echo "$input" > /tmp/claude-hook-debug.json
-prompt=$(echo "$input" | jq -r '.last_user_message // empty' 2>/dev/null | head -c 100)
+message=$(echo "$input" | jq -r '.last_assistant_message // empty' 2>/dev/null | head -c 100)
 
 TMUX_SESSION=$(tmux display-message -p '#S')
 TMUX_WINDOW=$(tmux display-message -p '#I')
 TMUX_WINDOW_NAME=$(tmux display-message -p '#W')
 
-message="${prompt:-Waiting for your input}"
+message="${message:-Waiting for your input}"
 
 # Send bell to the pane's tty so tmux highlights the window in the status bar
 pane_tty=$(tmux display-message -p -t "$TMUX_PANE" '#{pane_tty}' 2>/dev/null)

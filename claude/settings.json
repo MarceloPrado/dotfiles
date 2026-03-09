@@ -1,5 +1,5 @@
 {
-  "model": "opus",
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "hooks": {
     "Notification": [
       {
@@ -7,7 +7,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash ~/.claude/hooks/notify-waiting.sh"
+            "command": "bash ~/.claude/hooks/notify-waiting.sh",
+            "async": true
           }
         ]
       }
@@ -17,7 +18,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash ~/.claude/hooks/notify-waiting.sh"
+            "command": "bash ~/.claude/hooks/notify-waiting.sh",
+            "async": true
           }
         ]
       }
@@ -25,11 +27,12 @@
   },
   "statusLine": {
     "type": "command",
-    "command": "bash /Users/marceloprado/.claude/statusline-command.sh"
+    "command": "npx -y ccstatusline@latest",
+    "padding": 0
   },
   "enabledPlugins": {
-    "code-simplifier@claude-plugins-official": true
+    "gemini-peer-review@gemini-peer-review": true,
+    "codex-peer-review@agent-peer-review-marketplace": true
   },
-  "voiceEnabled": true,
   "skipDangerousModePermissionPrompt": true
 }

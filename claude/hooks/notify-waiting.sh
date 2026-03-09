@@ -31,8 +31,11 @@ TMUX_WINDOW_NAME=$(tmux display-message -p '#W')
 
 message="${prompt:-Waiting for your input}"
 
-# Send bell to the pane so tmux highlights the window in the status bar
-tmux run-shell -t "$TMUX_PANE" "printf '\a'" 2>/dev/null
+# Send bell to the pane's tty so tmux highlights the window in the status bar
+pane_tty=$(tmux display-message -p -t "$TMUX_PANE" '#{pane_tty}' 2>/dev/null)
+if [ -n "$pane_tty" ]; then
+  printf '\a' > "$pane_tty"
+fi
 
 terminal-notifier \
   -title "Claude Code" \

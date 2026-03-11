@@ -12,8 +12,11 @@ if [[ "$pane_active" == "1" && "$frontmost" == "Ghostty" ]]; then
 fi
 
 input=$(cat)
-transcript=$(echo "$input" | jq -r '.transcript_path')
-prompt=$(jq -r 'select(.type == "user") | .message.content | if type == "array" then map(select(.type == "text") | .text) | first // empty else . end' "$transcript" 2>/dev/null | tail -1 | head -c 100)
+transcript=$(echo "$input" | jq -r '.transcript_path // empty')
+if [[ -n "$transcript" && -f "$transcript" ]]; then
+  prompt=$(jq -r 'select(.type == "user") | .message.content | if type == "array" then map(select(.type == "text") | .text) | first // empty else . end' "$transcript" 2>/dev/null | grep -v '^$' | tail -1 | head -c 100)
+fi
+prompt="${prompt:-Task complete}"
 
 tmux_session=$(tmux display-message -p '#S')
 tmux_window=$(tmux display-message -p '#I')

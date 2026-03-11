@@ -30,6 +30,11 @@ ln -sf "$DOTFILES/claude/hooks/notify-waiting.sh" ~/.claude/hooks/notify-waiting
 ln -sf "$DOTFILES/claude/settings.json" ~/.claude/settings.json
 ln -sf "$DOTFILES/claude/keybindings.json" ~/.claude/keybindings.json
 
+# --- Zsh ---
+echo "-> Zsh"
+mkdir -p ~/.config/zsh
+ln -sf "$DOTFILES/zsh/git-worktree.zsh" ~/.config/zsh/git-worktree.zsh
+
 # --- Codex CLI ---
 echo "-> Codex CLI"
 # notify hook is referenced directly from dotfiles in ~/.codex/config.toml

@@ -19,9 +19,9 @@ fi
 
 # Skip if pane is active and Ghostty is frontmost
 pane_active=$(tmux display-message -p -t "$TMUX_PANE" '#{&&:#{pane_active},#{window_active}}' 2>/dev/null)
-frontmost=$(osascript -e 'tell application "System Events" to get name of first application process whose frontmost is true' 2>/dev/null)
+frontmost=$(osascript -e 'tell application "System Events" to get name of first application process whose frontmost is true' 2>/dev/null | tr '[:upper:]' '[:lower:]')
 
-if [[ "$pane_active" == "1" && "$frontmost" == "Ghostty" ]]; then
+if [[ "$pane_active" == "1" && "$frontmost" == "ghostty" ]]; then
   exit 0
 fi
 
@@ -41,12 +41,20 @@ if [ -n "$pane_tty" ]; then
   printf '\a' > "$pane_tty"
 fi
 
-terminal-notifier \
-  -title "Codex" \
-  -subtitle "$TMUX_WINDOW_NAME" \
-  -message "$message" \
-  -execute "/usr/bin/osascript -e 'tell application \"Ghostty\" to activate' -e 'delay 0.1' -e 'tell application \"System Events\" to tell process \"Ghostty\" to click radio button \"tmux\" of tab group \"tab bar\" of window 1' && /opt/homebrew/bin/tmux select-window -t '$TMUX_SESSION:$TMUX_WINDOW'" \
-  -group "codex-${thread_id:-$TMUX_SESSION-$TMUX_WINDOW}" \
-  -ignoreDnD
-
-exit 0
+if [[ "$frontmost" != "ghostty" ]]; then
+  # Not in Ghostty — use native OSC 9 for Ghostty-branded notification
+  client_tty=$(tmux display-message -p '#{client_tty}' 2>/dev/null)
+  if [[ -n "$client_tty" ]]; then
+    printf '\e]9;Codex: %s\a' "$message" > "$client_tty"
+  fi
+else
+  # In Ghostty on a different tmux window — use terminal-notifier
+  terminal-notifier \
+    -title "Codex" \
+    -subtitle "$TMUX_WINDOW_NAME" \
+    -message "$message" \
+    -activate com.mitchellh.ghostty \
+    -execute "osascript -e 'tell application \"Ghostty\" to activate' && /opt/homebrew/bin/tmux select-window -t '$TMUX_SESSION:$TMUX_WINDOW' && /opt/homebrew/bin/tmux select-pane -t '$TMUX_PANE'" \
+    -group "codex-${thread_id:-$TMUX_SESSION-$TMUX_WINDOW}" \
+    -ignoreDnD
+fi

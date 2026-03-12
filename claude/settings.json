@@ -1,5 +1,12 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "awsAuthRefresh": "aws sso login --profile DataPlatformDev-LimitedUser",
+  "env": {
+    "CLAUDE_CODE_USE_BEDROCK": "true",
+    "AWS_REGION": "us-west-2",
+    "AWS_PROFILE": "DataPlatformDev-LimitedUser"
+  },
+  "includeCoAuthoredBy": false,
   "hooks": {
     "Notification": [
       {

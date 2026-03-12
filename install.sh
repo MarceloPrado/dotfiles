@@ -5,50 +5,24 @@ DOTFILES="$(cd "$(dirname "$0")" && pwd)"
 
 echo "Installing dotfiles from $DOTFILES"
 
-# --- Neovim ---
-echo "-> Neovim"
-mkdir -p ~/.config/nvim
-for f in "$DOTFILES"/nvim/*; do
-  name=$(basename "$f")
-  ln -sf "$f" ~/.config/nvim/"$name"
-done
+# --- Stow packages ---
+cd "$DOTFILES"
+stow -t ~ nvim tmux zsh
+stow -t ~ --no-folding claude codex
 
-# --- tmux ---
-echo "-> tmux"
-mkdir -p ~/.config/tmux/plugins/catppuccin
-ln -sf "$DOTFILES/tmux/tmux.conf" ~/.config/tmux/tmux.conf
-
-# Install catppuccin theme if not present
+# --- tmux catppuccin theme ---
 if [ ! -d ~/.config/tmux/plugins/catppuccin/tmux ]; then
+  echo "-> Installing catppuccin tmux theme"
+  mkdir -p ~/.config/tmux/plugins/catppuccin
   git clone -b v2.1.3 https://github.com/catppuccin/tmux.git ~/.config/tmux/plugins/catppuccin/tmux
 fi
 
-# --- Claude Code ---
-echo "-> Claude Code"
-mkdir -p ~/.claude/hooks
-ln -sf "$DOTFILES/claude/hooks/notify.sh" ~/.claude/hooks/notify.sh
-ln -sf "$DOTFILES/claude/settings.json" ~/.claude/settings.json
-ln -sf "$DOTFILES/claude/keybindings.json" ~/.claude/keybindings.json
-
-# --- Zsh ---
-echo "-> Zsh"
-mkdir -p ~/.config/zsh
-ln -sf "$DOTFILES/zsh/git-worktree.zsh" ~/.config/zsh/git-worktree.zsh
-
-# --- Codex CLI ---
-echo "-> Codex CLI"
-# notify hook is referenced directly from dotfiles in ~/.codex/config.toml
-# Just ensure the script is executable
-chmod +x "$DOTFILES/codex/hooks/notify-waiting.sh"
-
 # --- Dependencies ---
 if command -v brew &>/dev/null; then
-  if ! command -v terminal-notifier &>/dev/null; then
-    echo "-> Installing terminal-notifier"
-    brew install terminal-notifier
-  fi
+  command -v stow &>/dev/null || brew install stow
+  command -v terminal-notifier &>/dev/null || brew install terminal-notifier
 else
-  echo "Warning: brew not found, skipping terminal-notifier install"
+  echo "Warning: brew not found, skipping dependency install"
 fi
 
 echo "Done! Reload tmux with: tmux source ~/.config/tmux/tmux.conf"

@@ -29,9 +29,10 @@ fi
 message=$(echo "$1" | jq -r '.["last-assistant-message"] // empty' 2>/dev/null | head -c 100)
 thread_id=$(echo "$1" | jq -r '.["thread-id"] // empty' 2>/dev/null)
 
-TMUX_SESSION=$(tmux display-message -p '#S')
-TMUX_WINDOW=$(tmux display-message -p '#I')
-TMUX_WINDOW_NAME=$(tmux display-message -p '#W')
+# Use -t $TMUX_PANE to get the window where Codex is running, not the focused window
+TMUX_SESSION=$(tmux display-message -p -t "$TMUX_PANE" '#S')
+TMUX_WINDOW=$(tmux display-message -p -t "$TMUX_PANE" '#I')
+TMUX_WINDOW_NAME=$(tmux display-message -p -t "$TMUX_PANE" '#W')
 
 message="${message:-Turn complete}"
 

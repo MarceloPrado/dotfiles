@@ -15,7 +15,7 @@ input=$(cat)
 hook_event=$(echo "$input" | jq -r '.hook_event_name // empty')
 transcript=$(echo "$input" | jq -r '.transcript_path // empty')
 if [[ -n "$transcript" && -f "$transcript" ]]; then
-  prompt=$(jq -r 'select(.type == "user") | .message.content | if type == "array" then map(select(.type == "text") | .text) | first // empty else . end' "$transcript" 2>/dev/null | grep -v '^$' | tail -1 | head -c 100)
+  prompt=$(jq -r 'select(.type == "assistant") | .message.content | if type == "array" then map(select(.type == "text") | .text) | last // empty else . end' "$transcript" 2>/dev/null | grep -v '^$' | tail -1 | head -c 100)
 fi
 
 if [[ "$hook_event" == "Notification" ]]; then
@@ -25,9 +25,10 @@ else
 fi
 prompt="${prompt:-Task complete}"
 
-tmux_session=$(tmux display-message -p '#S')
-tmux_window=$(tmux display-message -p '#I')
-tmux_window_name=$(tmux display-message -p '#W')
+# Use -t $TMUX_PANE to get the window where Claude is running, not the focused window
+tmux_session=$(tmux display-message -p -t "$TMUX_PANE" '#S')
+tmux_window=$(tmux display-message -p -t "$TMUX_PANE" '#I')
+tmux_window_name=$(tmux display-message -p -t "$TMUX_PANE" '#W')
 
 # Bell the pane so tmux highlights the window in the status bar
 pane_tty=$(tmux display-message -p -t "$TMUX_PANE" '#{pane_tty}' 2>/dev/null)

@@ -7,6 +7,7 @@
     "AWS_PROFILE": "DataPlatformDev-LimitedUser"
   },
   "includeCoAuthoredBy": false,
+  "model": "us.anthropic.claude-opus-4-6-v1",
   "hooks": {
     "Notification": [
       {
@@ -39,7 +40,8 @@
   },
   "enabledPlugins": {
     "gemini-peer-review@gemini-peer-review": true,
-    "codex-peer-review@agent-peer-review-marketplace": true
+    "codex-peer-review@agent-peer-review-marketplace": true,
+    "plannotator@plannotator": true
   },
   "skipDangerousModePermissionPrompt": true
 }

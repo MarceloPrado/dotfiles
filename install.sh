@@ -7,8 +7,18 @@ echo "Installing dotfiles from $DOTFILES"
 
 # --- Stow packages ---
 cd "$DOTFILES"
-stow -t ~ nvim tmux zsh
+stow -t ~ nvim tmux zsh opencode
 stow -t ~ --no-folding claude codex
+
+# --- Claude Code: machine-specific settings ---
+HOSTNAME=$(hostname)
+if [[ "$HOSTNAME" == "Marcelos-Mac-Studio.local" || "$HOSTNAME" == "Marcelos-MacBook-Air.local" ]]; then
+  PROFILE="personal"
+else
+  PROFILE="work"
+fi
+echo "-> Claude Code settings ($PROFILE)"
+ln -sf "$DOTFILES/claude/.claude/settings.$PROFILE.json" ~/.claude/settings.json
 
 # --- tmux catppuccin theme ---
 if [ ! -d ~/.config/tmux/plugins/catppuccin/tmux ]; then

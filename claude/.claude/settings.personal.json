@@ -50,5 +50,11 @@
       }
     }
   },
-  "skipDangerousModePermissionPrompt": true
+  "skipDangerousModePermissionPrompt": true,
+  "effortLevel": "high",
+  "mcpServers": {
+    "deepwiki": {
+      "serverUrl": "https://mcp.deepwiki.com/mcp"
+    }
+  }
 }

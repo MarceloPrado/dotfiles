@@ -43,5 +43,10 @@
     "codex-peer-review@agent-peer-review-marketplace": true,
     "plannotator@plannotator": true
   },
-  "skipDangerousModePermissionPrompt": true
+  "skipDangerousModePermissionPrompt": true,
+  "mcpServers": {
+    "deepwiki": {
+      "serverUrl": "https://mcp.deepwiki.com/mcp"
+    }
+  }
 }

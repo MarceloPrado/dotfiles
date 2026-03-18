@@ -7,7 +7,7 @@ echo "Installing dotfiles from $DOTFILES"
 
 # --- Stow packages ---
 cd "$DOTFILES"
-stow -t ~ tmux zsh opencode
+stow -t ~ tmux zsh opencode ripgrep
 stow -t ~ --no-folding --adopt claude codex
 
 # --- Claude Code: machine-specific settings ---
@@ -31,6 +31,8 @@ fi
 if command -v brew &>/dev/null; then
   command -v stow &>/dev/null || brew install stow
   command -v terminal-notifier &>/dev/null || brew install terminal-notifier
+  command -v tmux &>/dev/null || brew install tmux
+  command -v rg &>/dev/null || brew install ripgrep
 else
   echo "Warning: brew not found, skipping dependency install"
 fi

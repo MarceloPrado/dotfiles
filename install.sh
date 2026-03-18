@@ -7,8 +7,8 @@ echo "Installing dotfiles from $DOTFILES"
 
 # --- Stow packages ---
 cd "$DOTFILES"
-stow -t ~ nvim tmux zsh opencode
-stow -t ~ --no-folding claude codex
+stow -t ~ tmux zsh opencode
+stow -t ~ --no-folding --adopt claude codex
 
 # --- Claude Code: machine-specific settings ---
 HOSTNAME=$(hostname)

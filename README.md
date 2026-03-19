@@ -20,5 +20,5 @@ The Neovim config is intentionally minimal:
 
 - Treesitter syntax highlighting
 - `fzf-lua` for file search and grep
-- native LSP with `gd`, `gr`, and `gh`
+- native LSP with `gd`, `gr` (references picker), and `gh`
 - Mason-managed TypeScript/JavaScript language server

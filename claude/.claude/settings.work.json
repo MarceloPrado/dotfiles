@@ -7,7 +7,6 @@
     "AWS_PROFILE": "DataPlatformDev-LimitedUser"
   },
   "includeCoAuthoredBy": false,
-  "model": "us.anthropic.claude-opus-4-6-v1",
   "hooks": {
     "Notification": [
       {
@@ -48,5 +47,6 @@
     "deepwiki": {
       "serverUrl": "https://mcp.deepwiki.com/mcp"
     }
-  }
+  },
+  "model": "us.anthropic.claude-opus-4-6-v1[1m]"
 }

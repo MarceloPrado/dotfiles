@@ -21,4 +21,5 @@ The Neovim config is intentionally minimal:
 - Treesitter syntax highlighting
 - `fzf-lua` for file search and grep
 - native LSP with `gd`, `gr` (references picker), and `gh`
+- Catppuccin that follows macOS light/dark mode (`Latte`/`Mocha`)
 - Mason-managed TypeScript/JavaScript language server

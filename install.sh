@@ -8,7 +8,19 @@ echo "Installing dotfiles from $DOTFILES"
 # --- Stow packages ---
 cd "$DOTFILES"
 stow -t ~ nvim tmux zsh opencode ripgrep
-stow -t ~ --no-folding --adopt claude codex
+stow -t ~ --no-folding --adopt claude
+
+# --- Codex: tracked base config + gitignored generated config ---
+if ! command -v node &>/dev/null; then
+  echo "Error: node is required to render the Codex config"
+  exit 1
+fi
+
+echo "-> Codex config"
+node "$DOTFILES/scripts/render-codex-config.js"
+mkdir -p ~/.codex/hooks
+rm -f ~/.codex/config.toml ~/.codex/hooks/notify-waiting.sh
+stow -t ~ --no-folding codex
 
 # --- Claude Code: machine-specific settings ---
 HOSTNAME=$(hostname)

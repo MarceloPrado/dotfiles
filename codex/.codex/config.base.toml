@@ -1,0 +1,39 @@
+#:schema https://developers.openai.com/codex/config-schema.json
+
+# Shared Codex defaults.
+# scripts/render-codex-config.js copies this base into the gitignored
+# codex/.codex/config.toml file, then preserves everything after the
+# end-of-base marker in that generated file.
+notify = ["bash", "~/.codex/hooks/notify-waiting.sh"]
+model = "gpt-5.4"
+model_reasoning_effort = "xhigh"
+personality = "pragmatic"
+
+approval_policy = "on-request"
+sandbox_mode = "danger-full-access"
+
+[sandbox_workspace_write]
+network_access = true
+
+[notice]
+hide_gpt5_1_migration_prompt = true
+"hide_gpt-5.1-codex-max_migration_prompt" = true
+
+[notice.model_migrations]
+"gpt-5.1-codex-max" = "gpt-5.2-codex"
+"gpt-5.2-codex" = "gpt-5.3-codex"
+"gpt-5.2" = "gpt-5.3-codex"
+
+[features]
+shell_snapshot = true
+steer = true
+rmcp_client = true
+
+[mcp_servers.linear]
+url = "https://mcp.linear.app/mcp"
+
+[mcp_servers.datadog]
+url = "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp"
+
+[mcp_servers.deepwiki]
+url = "https://mcp.deepwiki.com/mcp"

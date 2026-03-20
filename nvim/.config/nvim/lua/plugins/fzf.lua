@@ -1,3 +1,14 @@
 return {
-  "ibhagwan/fzf-lua",
+  {
+    "ibhagwan/fzf-lua",
+    opts = {
+      keymap = {
+        builtin = {
+          [1] = true,
+          ["<C-j>"] = "preview-down",
+          ["<C-k>"] = "preview-up",
+        },
+      },
+    },
+  },
 }

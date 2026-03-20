@@ -41,8 +41,8 @@ local function line_range(visual)
     return line, line
   end
 
-  local start_line = vim.fn.line("'<")
-  local end_line = vim.fn.line("'>")
+  local start_line = vim.fn.getpos("v")[2]
+  local end_line = vim.api.nvim_win_get_cursor(0)[1]
   if start_line > end_line then
     start_line, end_line = end_line, start_line
   end

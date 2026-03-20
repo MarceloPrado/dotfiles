@@ -10,6 +10,8 @@ map("n", "<leader>fg", function()
   require("fzf-lua").live_grep()
 end, { desc = "Live grep" })
 
+map("i", "jj", "<Esc>", { desc = "Exit insert mode" })
+
 map("n", "<leader>gy", function()
   permalink.copy(false)
 end, { desc = "Yank git permalink" })

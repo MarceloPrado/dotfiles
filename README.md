@@ -17,6 +17,7 @@ The install script:
 - stows the repo packages into `~`
 - renders the gitignored `codex/.codex/config.toml` from the tracked Codex base config before stowing Codex into `~`
 - installs `stow`, `neovim`, `fzf`, `ripgrep`, `tmux`, and `terminal-notifier` with Homebrew when available
+- installs TPM and the Catppuccin tmux theme into `~/.config/tmux/plugins`
 
 ## Mise tools
 

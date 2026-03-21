@@ -65,6 +65,12 @@ echo "-> Claude Code settings ($PROFILE)"
 ln -sf "$DOTFILES/claude/.claude/settings.$PROFILE.json" ~/.claude/settings.json
 
 # --- tmux catppuccin theme ---
+if [ ! -d ~/.config/tmux/plugins/tpm ]; then
+  echo "-> Installing tmux plugin manager"
+  mkdir -p ~/.config/tmux/plugins
+  git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
+fi
+
 if [ ! -d ~/.config/tmux/plugins/catppuccin/tmux ]; then
   echo "-> Installing catppuccin tmux theme"
   mkdir -p ~/.config/tmux/plugins/catppuccin

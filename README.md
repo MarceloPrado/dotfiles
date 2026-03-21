@@ -12,10 +12,21 @@ cd ~/dotfiles
 
 The install script:
 
+- bootstraps `mise` with `curl https://mise.run | sh` when needed
+- installs the repo's local `node` version from `mise.toml`
 - stows the repo packages into `~`
 - renders the gitignored `codex/.codex/config.toml` from the tracked Codex base config before stowing Codex into `~`
-- installs or upgrades `neovim`
-- installs `fzf`, `ripgrep`, `tmux`, and other small dependencies
+- installs `stow`, `neovim`, `fzf`, `ripgrep`, `tmux`, and `terminal-notifier` with Homebrew when available
+
+## Mise tools
+
+`mise.toml` is only for the repo-local Node.js version.
+
+If you want tools to be global with mise, they need to live in your user config (`~/.config/mise/config.toml`) or be installed with `mise use -g ...`; a repo `mise.toml` is local to that repo.
+
+In this repo, the other shared CLI tools stay global through Homebrew instead.
+
+After pulling Node version changes on another machine, rerun `./install.sh` or `mise install` from the repo root.
 
 ## Codex config
 

@@ -7,3 +7,5 @@ foo.*
 *.log
 data
 codex/.codex/config.toml
+mise.local.toml
+mise.local.lock

@@ -7,6 +7,7 @@
     "AWS_PROFILE": "DataPlatformDev-LimitedUser"
   },
   "includeCoAuthoredBy": false,
+  "model": "us.anthropic.claude-opus-4-6-v1[1m]",
   "hooks": {
     "Notification": [
       {
@@ -42,11 +43,11 @@
     "codex-peer-review@agent-peer-review-marketplace": true,
     "plannotator@plannotator": true
   },
+  "effortLevel": "medium",
   "skipDangerousModePermissionPrompt": true,
   "mcpServers": {
     "deepwiki": {
       "serverUrl": "https://mcp.deepwiki.com/mcp"
     }
-  },
-  "model": "us.anthropic.claude-opus-4-6-v1[1m]"
+  }
 }

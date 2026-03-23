@@ -6,13 +6,17 @@ return {
     lazy = false,
     opts = {
       ensure_installed = {
+        "html",
         "json",
         "javascript",
         "lua",
+        "markdown",
+        "markdown_inline",
         "tsx",
         "typescript",
         "vim",
         "vimdoc",
+        "yaml",
       },
       auto_install = true,
       highlight = {

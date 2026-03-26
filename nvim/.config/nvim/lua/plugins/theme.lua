@@ -14,7 +14,7 @@ return {
         fzf = true,
         gitsigns = true,
         mason = true,
-        render_markdown = true,
+        snacks = true,
         treesitter = true,
         which_key = true,
       },

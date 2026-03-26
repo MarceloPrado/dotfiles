@@ -27,6 +27,7 @@ if command -v brew &>/dev/null; then
   command -v stow &>/dev/null || brew install stow
   command -v terminal-notifier &>/dev/null || brew install terminal-notifier
   command -v tmux &>/dev/null || brew install tmux
+  command -v fd &>/dev/null || brew install fd
   command -v fzf &>/dev/null || brew install fzf
   command -v rg &>/dev/null || brew install ripgrep
   if brew list neovim &>/dev/null; then

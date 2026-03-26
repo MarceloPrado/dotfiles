@@ -9,7 +9,6 @@ return {
         { "<leader>f", group = "find" },
         { "<leader>g", group = "git" },
         { "<leader>h", group = "git hunk" },
-        { "<leader>m", group = "markdown" },
         { "<leader>t", group = "toggle" },
       },
     },

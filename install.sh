@@ -45,7 +45,7 @@ if ! command -v stow &>/dev/null; then
 fi
 
 # --- Stow packages ---
-stow -t ~ nvim tmux zsh opencode ripgrep ghostty
+stow -t ~ nvim tmux zsh opencode ripgrep
 stow -t ~ --no-folding --adopt claude
 
 # --- Codex: tracked base config + gitignored generated config ---

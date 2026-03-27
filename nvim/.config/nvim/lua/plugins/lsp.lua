@@ -16,8 +16,12 @@ return {
   },
   {
     "neovim/nvim-lspconfig",
+    dependencies = {
+      "saghen/blink.cmp",
+    },
     config = function()
       local float = require("config.float")
+      local capabilities = require("blink.cmp").get_lsp_capabilities()
       local group = vim.api.nvim_create_augroup("dotfiles-lsp", { clear = true })
 
       vim.api.nvim_create_autocmd("LspAttach", {
@@ -43,7 +47,9 @@ return {
         float = { border = "rounded" },
       })
 
-      vim.lsp.config("ts_ls", {})
+      vim.lsp.config("ts_ls", {
+        capabilities = capabilities,
+      })
     end,
   },
 }

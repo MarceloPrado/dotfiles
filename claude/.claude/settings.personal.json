@@ -33,7 +33,8 @@
   },
   "enabledPlugins": {
     "codex-peer-review@agent-peer-review-marketplace": true,
-    "plannotator@plannotator": true
+    "plannotator@plannotator": true,
+    "frontend-design@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "agent-peer-review-marketplace": {
@@ -56,5 +57,5 @@
       "serverUrl": "https://mcp.deepwiki.com/mcp"
     }
   },
-  "model": "opus[1m]"
+  "model": "opus"
 }

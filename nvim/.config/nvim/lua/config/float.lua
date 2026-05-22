@@ -29,7 +29,12 @@ function M.toggle_lsp_hover()
     return
   end
 
-  vim.lsp.buf.hover()
+  local diagnostics = vim.diagnostic.get(0, { lnum = vim.api.nvim_win_get_cursor(0)[1] - 1 })
+  if #diagnostics > 0 then
+    vim.diagnostic.open_float()
+  else
+    vim.lsp.buf.hover()
+  end
 end
 
 return M

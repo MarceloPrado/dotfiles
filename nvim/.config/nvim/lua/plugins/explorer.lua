@@ -38,6 +38,7 @@ return {
         },
         sources = {
           explorer = {
+            hidden = true,
             actions = {
               confirm = explorer_confirm,
             },

@@ -2,6 +2,12 @@ return {
   {
     "ibhagwan/fzf-lua",
     opts = {
+      defaults = {
+        formatter = "path.filename_first",
+      },
+      grep = {
+        rg_glob = true, -- enable --glob parsing from query (use -- separator)
+      },
       winopts = {
         on_create = function()
           local job = vim.b.terminal_job_id

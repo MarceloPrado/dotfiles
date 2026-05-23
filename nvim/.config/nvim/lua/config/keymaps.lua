@@ -24,6 +24,9 @@ map("n", "<leader>?", command_palette, { desc = "Command palette" })
 
 map("i", "jj", "<Esc>", { desc = "Exit insert mode" })
 
+map("n", "<leader>/", "gcc", { remap = true, desc = "Toggle comment" })
+map("x", "<leader>/", "gc", { remap = true, desc = "Toggle comment" })
+
 map("n", "<leader>gy", function()
   permalink.copy(false)
 end, { desc = "Yank git permalink" })

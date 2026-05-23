@@ -5,6 +5,9 @@ return {
       defaults = {
         formatter = "path.filename_first",
       },
+      fzf_opts = {
+        ["--cycle"] = true,
+      },
       grep = {
         rg_glob = true, -- enable --glob parsing from query (use -- separator)
       },

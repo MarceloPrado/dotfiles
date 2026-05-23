@@ -20,6 +20,9 @@ return {
           "fallback",
         },
         ["<CR>"] = { "select_and_accept", "fallback" },
+        ["<C-.>"] = { "show", "show_documentation", "hide_documentation" },
+        ["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
+        ["<C-@>"] = { "show", "show_documentation", "hide_documentation" },
       },
       appearance = {
         nerd_font_variant = "mono",

@@ -80,6 +80,31 @@ return {
         map("n", "<leader>hb", function()
           gs.blame_line({ full = true })
         end, "Blame line")
+        map("n", "<leader>hP", function()
+          local line = vim.fn.line(".")
+          local file = vim.fn.expand("%:p")
+          local sha = vim.fn.systemlist({
+            "git", "-C", vim.fn.expand("%:p:h"),
+            "log", "-1", "--format=%H",
+            "-L", string.format("%d,%d:%s", line, line, file),
+          })[1]
+          if not sha or sha == "" then
+            return vim.notify("no blame sha", vim.log.levels.WARN)
+          end
+          vim.system({
+            "gh", "pr", "list", "--search", sha, "--state", "merged",
+            "--json", "url", "--jq", ".[0].url",
+          }, { text = true }, function(o)
+            local url = vim.trim(o.stdout or "")
+            vim.schedule(function()
+              if url == "" then
+                vim.notify("no PR for " .. sha:sub(1, 7), vim.log.levels.WARN)
+              else
+                vim.system({ "open", url }, { detach = true })
+              end
+            end)
+          end)
+        end, "Open PR for line")
         map("n", "<leader>tb", gs.toggle_current_line_blame, "Toggle line blame")
         map("x", "<leader>hs", function()
           gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })

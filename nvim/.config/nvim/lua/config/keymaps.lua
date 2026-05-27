@@ -16,8 +16,12 @@ map("n", "<leader>ff", function()
   require("fzf-lua").files()
 end, { desc = "Find files" })
 
+local last_grep_at = 0
+local GREP_RESUME_TTL = 5 * 60
 map("n", "<leader>fg", function()
-  require("fzf-lua").live_grep()
+  local fresh = (os.time() - last_grep_at) > GREP_RESUME_TTL
+  last_grep_at = os.time()
+  require("fzf-lua").live_grep({ resume = not fresh })
 end, { desc = "Live grep" })
 
 map("n", "<leader>?", command_palette, { desc = "Command palette" })

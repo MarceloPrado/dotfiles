@@ -1,0 +1,5 @@
+command = /bin/zsh
+shell-integration-features = ssh-terminfo,ssh-env
+keybind = shift+enter=text:\x1b[13;2u
+theme = dark:Catppuccin Mocha,light:Catppuccin Latte
+bell-features = system,audio,attention,border

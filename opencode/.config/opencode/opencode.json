@@ -1,16 +1,41 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "plugin": ["@plannotator/opencode@latest"],
   "mcp": {
-    "linear": {
+    "datadog": {
+      "enabled": true,
       "type": "remote",
-      "url": "https://mcp.linear.app/mcp",
-      "enabled": true
+      "url": "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp"
     },
     "deepwiki": {
+      "enabled": true,
+      "environment": {
+        "CLIENT_APP_NAME": "opencode"
+      },
       "type": "remote",
-      "url": "https://mcp.deepwiki.com/mcp",
+      "url": "https://mcp.deepwiki.com/mcp"
+    },
+    "linear": {
+      "enabled": true,
+      "environment": {
+        "CLIENT_APP_NAME": "opencode"
+      },
+      "type": "remote",
+      "url": "https://mcp.linear.app/mcp"
+    },
+    "glean": {
+      "type": "remote",
+      "url": "https://brex-be.glean.com/mcp/default/sse",
       "enabled": true
+    }
+  },
+  "plugin": [
+    "@plannotator/opencode@latest"
+  ],
+  "provider": {
+    "fireworks-ai": {
+      "options": {
+        "baseURL": "https://ai-guard.onyx.security/c5df90ae9d94f2ee63ad0748ab0ee8bab1df0da0df7156290dafa43504f74e70/eJyqVkpJLctMTvVLzE1VslLy9TMy9zYw9nY3UtJRSs7JTM0rcSwogErmF6TmJeenpCrpKOUXK1kppSQWlWfmKekoFacWZSbm-JXmJqUWoRpSCwgAAP__yCgeIA/api.fireworks.ai/inference/v1"
+      }
     }
   }
 }

@@ -4,10 +4,12 @@
   "env": {
     "CLAUDE_CODE_USE_BEDROCK": "true",
     "AWS_REGION": "us-west-2",
-    "AWS_PROFILE": "DataPlatformDev-LimitedUser"
+    "AWS_PROFILE": "DataPlatformDev-LimitedUser",
+    "NODE_EXTRA_CA_CERTS": "/Users/mprado/.surepath/auth-helper/claude-code/certs/extra-ca-certs.pem",
+    "ENABLE_TOOL_SEARCH": "true"
   },
   "includeCoAuthoredBy": false,
-  "model": "us.anthropic.claude-opus-4-6-v1[1m]",
+  "model": "sonnet",
   "hooks": {
     "Notification": [
       {
@@ -39,12 +41,36 @@
     "padding": 0
   },
   "enabledPlugins": {
-    "gemini-peer-review@gemini-peer-review": true,
     "codex-peer-review@agent-peer-review-marketplace": true,
-    "plannotator@plannotator": true
+    "plannotator@plannotator": true,
+    "codex@openai-codex": true,
+    "frontend-design@claude-plugins-official": true,
+    "skill-creator@claude-plugins-official": true,
+    "last30days@last30days-skill": true
   },
-  "effortLevel": "medium",
+  "extraKnownMarketplaces": {
+    "openai-codex": {
+      "source": {
+        "source": "github",
+        "repo": "openai/codex-plugin-cc"
+      }
+    },
+    "last30days-skill": {
+      "source": {
+        "source": "github",
+        "repo": "mvanhorn/last30days-skill"
+      }
+    },
+    "brex": {
+      "source": {
+        "source": "directory",
+        "path": "/Users/mprado/.brexctl/agent/generated/claude/marketplace"
+      }
+    }
+  },
+  "effortLevel": "high",
   "skipDangerousModePermissionPrompt": true,
+  "theme": "auto",
   "mcpServers": {
     "deepwiki": {
       "serverUrl": "https://mcp.deepwiki.com/mcp"

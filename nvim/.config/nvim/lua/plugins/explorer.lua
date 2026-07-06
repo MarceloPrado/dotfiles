@@ -46,6 +46,7 @@ return {
               list = {
                 keys = {
                   ["/"] = "focus_input",
+                  ["gh"] = { function() end, desc = "noop (avoid h fallthrough)" },
                 },
               },
             },

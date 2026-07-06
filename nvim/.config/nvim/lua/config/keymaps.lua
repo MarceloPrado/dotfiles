@@ -12,17 +12,26 @@ for _, mode in ipairs({ "i", "c" }) do
   end
 end
 
+local PICKER_RESUME_TTL = 5 * 60
+
+local last_files_at = 0
 map("n", "<leader>ff", function()
-  require("fzf-lua").files()
+  local fresh = (os.time() - last_files_at) > PICKER_RESUME_TTL
+  last_files_at = os.time()
+  require("fzf-lua").files({ resume = not fresh })
 end, { desc = "Find files" })
 
 local last_grep_at = 0
-local GREP_RESUME_TTL = 5 * 60
 map("n", "<leader>fg", function()
-  local fresh = (os.time() - last_grep_at) > GREP_RESUME_TTL
+  local fresh = (os.time() - last_grep_at) > PICKER_RESUME_TTL
   last_grep_at = os.time()
   require("fzf-lua").live_grep({ resume = not fresh })
 end, { desc = "Live grep" })
+
+map("x", "<leader>fg", function()
+  last_grep_at = os.time()
+  require("fzf-lua").grep_visual()
+end, { desc = "Live grep selection" })
 
 map("n", "<leader>?", command_palette, { desc = "Command palette" })
 

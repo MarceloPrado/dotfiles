@@ -2,9 +2,6 @@ return {
   {
     "ibhagwan/fzf-lua",
     opts = {
-      defaults = {
-        formatter = "path.filename_first",
-      },
       fzf_opts = {
         ["--cycle"] = true,
       },
@@ -12,6 +9,10 @@ return {
         rg_glob = true, -- enable --glob parsing from query (use -- separator)
       },
       winopts = {
+        preview = {
+          layout = "vertical",
+          vertical = "down:55%",
+        },
         on_create = function()
           local job = vim.b.terminal_job_id
           if not job then
@@ -30,8 +31,8 @@ return {
       keymap = {
         builtin = {
           [1] = true,
-          ["<C-j>"] = "preview-down",
-          ["<C-k>"] = "preview-up",
+          ["<M-j>"] = "preview-down",
+          ["<M-k>"] = "preview-up",
         },
       },
     },

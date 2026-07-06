@@ -30,6 +30,7 @@ if command -v brew &>/dev/null; then
   command -v fd &>/dev/null || brew install fd
   command -v fzf &>/dev/null || brew install fzf
   command -v rg &>/dev/null || brew install ripgrep
+  brew list --cask hammerspoon &>/dev/null || brew install --cask hammerspoon
   if brew list neovim &>/dev/null; then
     brew upgrade neovim
   else
@@ -45,7 +46,7 @@ if ! command -v stow &>/dev/null; then
 fi
 
 # --- Stow packages ---
-stow -t ~ nvim tmux zsh opencode ripgrep ghostty
+stow -t ~ nvim tmux zsh opencode ripgrep ghostty hammerspoon
 stow -t ~ --no-folding --adopt claude
 
 # --- Codex: tracked base config + gitignored generated config ---

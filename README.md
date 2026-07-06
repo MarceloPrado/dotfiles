@@ -1,6 +1,6 @@
 # dotfiles
 
-Personal config for Neovim, tmux, zsh, Claude Code, and a few CLI tools.
+Personal config for Neovim, tmux, zsh, Hammerspoon, Claude Code, and a few CLI tools.
 
 ## Install
 
